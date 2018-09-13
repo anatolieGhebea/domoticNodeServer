@@ -1,5 +1,5 @@
 # domoticNodeServer
-This repository holds a bunch of code snippets for a domotic (nodejs) server run by raspberry pi 3
+Questa repository contiene frammenti di codice per un "server domotico" che gira su un raspberry pi. 
 
 
 ## extra info
