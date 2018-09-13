@@ -19,7 +19,7 @@ touch server.js
 ```
 
 all'interno di questo file mettiamo il contenuto del file 
-server_v1.js
+[server_v1.js](server_v1.js)
 
 ## Cream il client
 
@@ -34,5 +34,5 @@ entriamo nella cartella public e creamo il file index.html
 touch index.html
 ```
 
-e mettiamo il contenuto del file public/index.html
+e mettiamo il contenuto del file [public/index.html](public/index.html)
 
