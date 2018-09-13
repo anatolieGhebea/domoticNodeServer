@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Controller domotico</title>
+    <!-- visto che il progetto è piccolo teniamo il css e lo script nello stesso file -->
+
+    <style>
+        .container {
+            width: 100%;
+            height: 100vh;
+            background: #f1f1f1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="main">
+            <h1>Controller</h1>
+
+            <div>
+                <h2>controllo LED </h2>
+                <input id="light" type="checkbox"> LED
+            </div>
+
+            <p>Questa è la pagina ci controllo remoto</p>
+        </div>
+    </div>
+
+
+<!-- inclusione della libreria socket.io -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script>
+    var socket = io(); //carica il socket.io-client e si connette al server che fornisce questa pagina html
+    window.addEventListener("load", function(){ //quando la pagina si acrica
+        var lightbox = document.getElementById("light");
+        lightbox.addEventListener("change", function() { //aggiungi event listener per percepire quando il bottone cambia stato
+            socket.emit("light", Number(this.checked)); //invia al server lo stato del bottone
+        });
+    });
+
+    socket.on('light', function (data) { //ricevi lo stato del LED dal server
+        document.getElementById("light").checked = data; //imposta il checkbox allo stesso valore come su Raspberry Pi
+        socket.emit("light", data); //invia lo stato indietro al server
+    });
+</script>
+</body>
+</html>
