@@ -21,7 +21,7 @@ installarla sulla microsd.
 
 ### Da Mac 
 cambia solo il comando per individuare la microSd e il path per la microSd, per il resto la procedura è uguale.
-![comando dd ][/img/cmd_dd.jpg]
+![comando dd ](/img/cmd_dd.jpg)
 
 ## extra info
 
