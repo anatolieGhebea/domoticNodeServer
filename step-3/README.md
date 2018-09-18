@@ -14,3 +14,7 @@ touch webserver.js
 
 E inseriamo il contenuto del file [webserver.js](webserver.js)
 
+# Aggiumgiamo anche il controllo di un led RGB tramite pagina HTML
+nella cartella public creaiamo il file [plusrgb.html](/public/plusrgb.html)
+mentr e nella cartella attuale 'step-3' creiamo il file [webserver2.js](webserver2.js)
+
