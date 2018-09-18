@@ -3,7 +3,6 @@
  * quindi il mio contributo si riduce alla traduzione dei commenti e qualche piccolo adattamento qua e là.
  */
 
-
 var http = require('http').createServer(handler); //import il modulo http server, e crea il server con la funzione handler()
 var fs = require('fs'); //importa il modulo per la gestione del filesystem
 
