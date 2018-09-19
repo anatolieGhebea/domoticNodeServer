@@ -47,15 +47,15 @@ io.sockets.on('connection', function (socket) {//Alla connessione  WebSocket
 
     socket.on('light', function(data) { //riceve dal client lo stato del bottone(virtuale)
         lightvalue = data; 
-        if (lightvalue != LED.readSync()) { //aggiorna lo stato del LED solo se è cambiato
-            LED.writeSync(lightvalue); //accendi o spegni il led.
+        if (lightvalue != LED.digitalRead()) { //aggiorna lo stato del LED solo se è cambiato
+            LED.digitalWrite(lightvalue); //accendi o spegni il led.
         }
     });
 
 });
   
 process.on('SIGINT', function () { //quando si preme ctrl+c
-    LED.writeSync(0); // Spegni il led
+    LED.digitalWrite(0); // Spegni il led
     LED.unexport(); // libera le risorse
     pushButton.unexport(); // libera le risorse allocate per il bottone
     process.exit(); //esci dal programma
