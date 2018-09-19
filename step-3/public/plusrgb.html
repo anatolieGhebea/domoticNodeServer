@@ -19,6 +19,10 @@
             align-items: center;
         }
 
+        .main {
+            width: 90%;
+        }
+
         .slider {
             -webkit-appearance: none;
             width: 100%;
@@ -55,19 +59,38 @@
         #greenSlider::-moz-range-thumb {background: green;}
         #blueSlider::-webkit-slider-thumb {background: blue;}
         #blueSlider::-moz-range-thumb {background: blue;}
+
+
+        #colorShow div {
+            width: 100%;
+            max-width: 10rem;
+            min-height: 5rem;
+        }
+
+        .cs-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .cs-container {
+            flex-grow: 1;
+            flex-shrink: 1;
+            padding: 2rem;
+        }
     </style>
 </head>
 <body>
     
     <div class="container">
         <div class="main">
-            <h1>Controller</h1>
+            <h1 style="text-align:center;">Controller</h1>
 
             <div>
                 <h2>controllo LED </h2>
                 <input id="light" type="checkbox"> LED
             </div>
-
+<br><br>
             <div>
                 <h1>RGB Color</h1>
                 <div class="cs-wrapper">
@@ -83,15 +106,16 @@
                 <p>Oppure seleziona un colore: <input type="color" id="pickColor"></p>
             </div>
 
-            <p>Questa è la pagina ci controllo remoto</p>
         </div>
     </div>
 
 
 <!-- inclusione della libreria socket.io -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
 <!-- <script src="https://www.w3schools.com/lib/w3color.js"></script> -->
-<script src="js/w3color.js"></script>
+<script src="/js/socket.io.js"></script>
+<script src="/js/socket.io.js.map"></script>
+<script src="/js/w3color.js"></script>
 <script>
     var socket = io(); //carica il socket.io-client e si connette al server che fornisce questa pagina html
     var rgb = w3color("rgb(0,0,0)"); //usiamo la librera w3color.js per tenere il colore come oggetto    
