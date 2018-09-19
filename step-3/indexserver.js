@@ -9,7 +9,11 @@ var fs = require('fs'); //importa il modulo per la gestione del filesystem
 var io = require('socket.io')(http) //importa il modulo socket.io e passa l'oggetto http (server)
 var Gpio = require('pigpio').Gpio; //include onoff to interact with the GPIO
 var LED = new Gpio(4, { mode: Gpio.OUTPUT }); //usa il pin GPIO 4 (fisico 7), e specifica che deve essere usato in USCITA 
-var pushButton = new Gpio(17, 'in', 'rising'); //usa il pin GPIO 17 (11) come input, e reagisci quando il bottone viene rilasciato
+var pushButton = new Gpio(17, {
+    mode: Gpio.INPUT,
+    pullUpDown: Gpio.PUD_DOWN,
+    edge: Gpio.RISING_EDGE
+  }); //usa il pin GPIO 17 (11) come input, e reagisci quando il bottone viene rilasciato
 
 
 http.listen(8080); //ascolta sulla porta 8080
@@ -32,7 +36,7 @@ function handler (req, res) { //la funzione che crea il server
 
 io.sockets.on('connection', function (socket) {//Alla connessione  WebSocket
     var lightvalue = 0; //variabile che tiene memorizzata lo stato del led
-    pushButton.watch(function (err, value) { //osserva il bottone, quando arriva l'interrupt esegue la funzione
+    pushButton.on('interrupt', function(err, value) { //osserva il bottone, quando arriva l'interrupt esegue la funzione
         if (err) { //se ci sono errori
             console.error('There was an error', err); //stampa sulla console l'errore
             return;
