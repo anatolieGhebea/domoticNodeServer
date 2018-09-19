@@ -160,6 +160,17 @@
         socket.emit("rgbLed", rgb);  //invia il colore aggiornato al Led via webSocket
         });
 
+
+    });
+
+    socket.on("rgbLed", function(data){
+        rgb.red = data.red; //aggiorna il colore Rosso in base al selettore
+        rgb.green = data.green; //aggiorna il colore Rosso in base al selettore
+        rgb.blue = data.blue; //aggiorna il colore Rosso in base al selettore
+        colorShow.style.backgroundColor = rgb.toRgbString();  //aggiorna il colore corrente
+        rSlider.value = rgb.red;  //aggiorna la posizione del cursore Rosso in base al selettore
+        gSlider.value = rgb.green;  //aggiorna la posizione del cursore Verde in base al selettore
+        bSlider.value = rgb.blue;  //aggiorna la posizione del cursore Blue in base al selettore
     });
 
     socket.on('light', function (data) { //ricevi lo stato del LED dal server

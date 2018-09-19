@@ -57,7 +57,7 @@ function handler (req, res) { //la funzione che crea il server
           }
           
           res.writeHead(200, {'Content-Type': 'text/javascript'}); 
-          res.write(data); //write data from index.html
+          res.write(data); //write data from socket.io
           return res.end();
       });
   }else if(page == '/js/socket.io.js.map'){
@@ -68,7 +68,7 @@ function handler (req, res) { //la funzione che crea il server
           }
           
           res.writeHead(200, {'Content-Type': 'text/javascript'}); 
-          res.write(data); //write data from index.html
+          res.write(data); //write data from socket.map
           return res.end();
       });
   }else if(page == '/js/w3color.js'){
@@ -78,13 +78,12 @@ function handler (req, res) { //la funzione che crea il server
         return res.end("404 Not Found");
       }
       res.writeHead(200, {'Content-Type': 'text/javascript'}); //write HTML
-      res.write(data); //write data from index.html
+      res.write(data); //write data from w3color
       return res.end();
     }); 
   }else{
-      res.writeHead(200, {'Content-Type': 'text/html'}); //componi la testa per la risposta
-      res.write(data); //scrivi il contenuto dal file index.html
-      return res.end(); //termina la risposta al client
+      res.writeHead(404, {'Content-Type': 'text/html'}); //display 404 on error
+      return res.end("404 Not Found");
   }  
 
 } 
@@ -101,6 +100,7 @@ io.sockets.on('connection', function (socket) {//Alla connessione  WebSocket
       if (lightvalue != LED.digitalRead()) { //aggiorna lo stato del LED solo se è cambiato
           LED.digitalWrite(lightvalue); //accendi o spegni il led.
           console.log('new state ' + lightvalue);
+          socket.broadcast.emit('light', lightvalue);
           
       }
     });
@@ -118,6 +118,8 @@ io.sockets.on('connection', function (socket) {//Alla connessione  WebSocket
         ledRed.pwmWrite(redRGB); //imposta il colore Rosso al valore ricevuto
         ledGreen.pwmWrite(greenRGB); //imposta il colore Verde al valore ricevuto
         ledBlue.pwmWrite(blueRGB); //imposta il colore Blu al valore ricevuto
+
+        socket.broadcast.emit('rgbLed', data);
       });
 
 });
